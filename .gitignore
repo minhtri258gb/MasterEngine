@@ -1,0 +1,8 @@
+/bin/.cmake
+/bin/CMakeFiles
+/bin/CMakeCache.txt
+/bin/Makefile
+/bin/main.exe
+/bin/libtest.a
+/bin/compile_commands.json
+/bin/cmake_install.cmake
