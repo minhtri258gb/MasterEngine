@@ -6,3 +6,10 @@
 /bin/libtest.a
 /bin/compile_commands.json
 /bin/cmake_install.cmake
+/.vscode/settings.json
+/bin/libcore.a
+/bin/libengine.a
+/bin/libgraphic.a
+/doc/TODO
+/bin/libgame.a
+/doc/DEBUG

@@ -8,12 +8,19 @@ by a blank line.
 ## Thư viện sử dụng
 
 Bullet list:
-- GLFW
-- Bullet Physic
-	- hello
-	- hello
+- core
+	- exception
+	- math
+	- random
+- graphic
+	- GLAD
+	- GLFW
+- physic
+	- Bullet Physic
 - ENet
 - OpenAL
+- engine
+	- load
 
 Two spaces at the end of a line  
 produce a line break.
