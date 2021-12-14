@@ -1,5 +1,5 @@
-#ifndef __VERTEX_BUFFER_OBJECT_H__
-#define __VERTEX_BUFFER_OBJECT_H__
+#ifndef __MT_VERTEX_BUFFER_OBJECT_H__
+#define __MT_VERTEX_BUFFER_OBJECT_H__
 
 namespace mt {
 namespace graphic {

@@ -1,5 +1,5 @@
-#ifndef __VERTEX_ARRAY_OBJECT_H__
-#define __VERTEX_ARRAY_OBJECT_H__
+#ifndef __MT_VERTEX_ARRAY_OBJECT_H__
+#define __MT_VERTEX_ARRAY_OBJECT_H__
 
 #include "VertexBufferObject.h"
 #include "ElementBufferObject.h"

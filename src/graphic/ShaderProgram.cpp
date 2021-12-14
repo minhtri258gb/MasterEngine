@@ -1,4 +1,7 @@
-#define __SHADER_PROGRAM_CPP__
+#define __MT_SHADER_PROGRAM_CPP__
+
+#include <fstream>
+#include <sstream>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -6,19 +9,17 @@
 #include "common.h"
 #include "ShaderProgram.h"
 #include "engine/Config.h"
-#include "engine/load/TextFile.h"
 
 using namespace mt::engine;
 using namespace mt::graphic;
 
 ShaderProgram::ShaderProgram()
 {
-	// #TODO
+	this->programId = -1;
 }
 
 ShaderProgram::~ShaderProgram()
 {
-
 }
 
 void ShaderProgram::init(std::string _filename, int _flag)
@@ -70,7 +71,9 @@ void ShaderProgram::init(std::string _filename, int _flag)
 
 void ShaderProgram::close()
 {
-	// #TODO
+	locations.clear();
+
+	glDeleteProgram(this->programId);
 }
 
 void ShaderProgram::use()
@@ -78,16 +81,71 @@ void ShaderProgram::use()
 	glUseProgram(this->programId);
 }
 
+void ShaderProgram::addLocation(std::string _unifromName)
+{
+	int location = glGetUniformLocation(this->programId, _unifromName.c_str());
+	this->locations.push_back(location);
+}
+
+void ShaderProgram::setUnifrom(int _locationId, bool _value)
+{         
+    glUniform1i(this->locations.at(_locationId), (int)_value); 
+}
+
+void ShaderProgram::setUnifrom(int _locationId, int _value)
+{ 
+    glUniform1i(this->locations.at(_locationId), _value); 
+}
+
+void ShaderProgram::setUnifrom(int _locationId, float _value)
+{ 
+    glUniform1f(this->locations.at(_locationId), _value); 
+} 
+
+void ShaderProgram::setUnifrom(int _locationId, glm::vec2 _value)
+{
+	glUniform2f(this->locations.at(_locationId), _value.x, _value.y);
+}
+
+void ShaderProgram::setUnifrom(int _locationId, glm::ivec2 _value)
+{
+	glUniform2i(this->locations.at(_locationId), _value.x, _value.y);
+}
+
+void ShaderProgram::setUnifrom(int _locationId, glm::vec3 _value)
+{
+	glUniform3f(this->locations.at(_locationId), _value.x, _value.y, _value.z);
+}
+
+void ShaderProgram::setUnifrom(int _locationId, glm::ivec3 _value)
+{
+	glUniform3i(this->locations.at(_locationId), _value.x, _value.y, _value.z);
+}
+
+void ShaderProgram::setUnifrom(int _locationId, glm::vec4 _value)
+{
+	glUniform4f(this->locations.at(_locationId), _value.x, _value.y, _value.z, _value.w);
+}
+
+void ShaderProgram::setUnifrom(int _locationId, glm::mat4 _value)
+{
+	glUniformMatrix4fv(this->locations.at(_locationId), 1, GL_FALSE, glm::value_ptr(_value));
+}
+
 unsigned int ShaderProgram::initShaderPath(std::string _filepath, SHADER_TYPE _type)
 {
 	// Read source
-	TextFile file(_filepath);
-	long length = file.getLength();
-	if (length == 0)
-		throw Exception("File is empty: "+_filepath, __FILE__, __LINE__);
+	std::ifstream shaderFile;
+	shaderFile.open(_filepath);
+	if (!shaderFile)
+		throw Exception("Unable to open file " + _filepath, __FILE__, __LINE__);
 
-	char *bufferSource = new char[length];
-	file.read(bufferSource, length);
+	std::stringstream shaderStream;
+	shaderStream << shaderFile.rdbuf();
+	shaderFile.close();
+	
+	std::string shaderSrc = shaderStream.str();
+	const char* bufferSource = shaderSrc.c_str();
 
 	// Create shader
 	unsigned int shaderId;
@@ -116,9 +174,6 @@ unsigned int ShaderProgram::initShaderPath(std::string _filepath, SHADER_TYPE _t
 		glGetShaderInfoLog(shaderId, 512, NULL, infoLog);
 		throw Exception("Failed to compile shader: "+_filepath+'\n'+infoLog, __FILE__, __LINE__);
 	}
-
-	// Clean
-	delete bufferSource;
 
 	return shaderId;
 }

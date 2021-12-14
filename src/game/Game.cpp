@@ -1,4 +1,6 @@
-#define __GAME_CPP__
+#define __MT_GAME_CPP__
+
+// #define LOG
 
 #include "common.h"
 #include "Game.h"
@@ -6,8 +8,10 @@
 
 // test import
 #include "graphic/ShaderProgram.h"
-#include "graphic/VertexArrayObject.h"
+#include "game/maps/LobbyMap.h"
 
+using namespace std;
+using namespace glm;
 using namespace mt::engine;
 using namespace mt::graphic;
 using namespace mt::game;
@@ -19,23 +23,59 @@ Game::Game()
 
 Game::~Game()
 {
-
 }
 
 void Game::run()
 {
+
+	#ifdef LOG
+	cout << __FILE__ << " | " << __LINE__ << '\n';
+	#endif
+
 	try
 	{
 		this->init();
 
+	#ifdef LOG
+	cout << __FILE__ << " | " << __LINE__ << '\n';
+	#endif
+
 		this->framework();
 
+	#ifdef LOG
+	cout << __FILE__ << " | " << __LINE__ << '\n';
+	#endif
+	
 		this->close();
+	
+	#ifdef LOG
+	cout << __FILE__ << " | " << __LINE__ << '\n';
+	#endif
+	
 	}
 	catch (Exception e)
 	{
-		std::cerr << e.getMessage() << '\n';
+		
+		#ifdef LOG
+		cout << __FILE__ << " | " << __LINE__ << '\n';
+		#endif
+	
+		cerr << e.getMessage() << '\n';
 	}
+	catch (std::exception e)
+	{
+		
+		#ifdef LOG
+		cout << __FILE__ << " | " << __LINE__ << '\n';
+		#endif
+	
+		cerr << e.what() << '\n';
+	}
+	
+	#ifdef LOG
+	cout << __FILE__ << " | " << __LINE__ << '\n';
+	#endif
+	
 }
 
 void Game::init()
@@ -43,38 +83,18 @@ void Game::init()
 	// Init module
 	Graphic::ins.init();
 
-	// #ADD
+	// Init component
+	this->map = new LobbyMap();
+
+	// #EXTRA
 }
 
 void Game::framework()
 {
 
-	// test playground
-	ShaderProgram shader;
-	shader.init("simple",	ShaderProgram::SHADER_TYPE::VERTEX |
-							ShaderProgram::SHADER_TYPE::FRAGMENT);
-
-	std::vector<glm::vec3> vertices;
-	vertices.push_back(glm::vec3( 0.5f,  0.5f, 0.0f));
-	vertices.push_back(glm::vec3( 0.5f, -0.5f, 0.0f));
-	vertices.push_back(glm::vec3(-0.5f, -0.5f, 0.0f));
-	vertices.push_back(glm::vec3(-0.5f,  0.5f, 0.0f));
-
-	std::vector<unsigned int> indices;
-	indices.push_back(0);
-	indices.push_back(1);
-	indices.push_back(3);
-	indices.push_back(1);
-	indices.push_back(2);
-	indices.push_back(3);
-
-	VertexArrayObject VAO;
-	VAO.init();
-	// VAO.setCount(vertices.size());
-	VAO.bind();
-	VAO.addAttribute(vertices);
-	VAO.addIndices(indices);
-	VAO.unbind();
+	#ifdef LOG
+	cout << __FILE__ << " | " << __LINE__ << '\n';
+	#endif
 
 	// Main loop
 	while (this->mainloop)
@@ -82,16 +102,25 @@ void Game::framework()
 		// input
 		Graphic::ins.processInput();
 
+		// input network
+
+		// loading
+		this->map->load();
+
 		// rendering commands here
 		Graphic::ins.renderPre();
 
-		// test render
-		shader.use();
-		VAO.bind();
-		// VAO.renderTriangle();
-		VAO.drawElementTriangle();
-		VAO.unbind();
-		
+		#ifdef LOG
+		cout << __FILE__ << " | " << __LINE__ << '\n';
+		#endif
+
+		// Map render
+		this->map->render();
+
+		#ifdef LOG
+		cout << __FILE__ << " | " << __LINE__ << '\n';
+		#endif
+
 		// #ADD
 
 		// check and call events and swap the buffers
@@ -103,8 +132,15 @@ void Game::framework()
 
 void Game::close()
 {
-	// Close Module
-	Graphic::ins.close();
+	// Clear component
+	
+	// #EXTRA
+	this->map->clear();
+	delete this->map;
 
-	// #ADD
+	// Close Module
+	
+	// #EXTRA
+	
+	Graphic::ins.close();
 }

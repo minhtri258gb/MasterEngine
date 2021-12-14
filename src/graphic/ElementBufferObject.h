@@ -1,5 +1,5 @@
-#ifndef __ELEMENT_BUFFER_OBJECT_H__
-#define __ELEMENT_BUFFER_OBJECT_H__
+#ifndef __MT_ELEMENT_BUFFER_OBJECT_H__
+#define __MT_ELEMENT_BUFFER_OBJECT_H__
 
 namespace mt {
 namespace graphic {

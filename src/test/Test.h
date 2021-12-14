@@ -1,5 +1,5 @@
-#ifndef __TEST_H__
-#define __TEST_H__
+#ifndef __MT_TEST_H__
+#define __MT_TEST_H__
 
 namespace mt {
 namespace test {

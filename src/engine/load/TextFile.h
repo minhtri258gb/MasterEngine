@@ -1,5 +1,5 @@
-#ifndef __TEXT_FILE_H__
-#define __TEXT_FILE_H__
+#ifndef __MT_TEXT_FILE_H__
+#define __MT_TEXT_FILE_H__
 
 #include <fstream>
 

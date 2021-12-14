@@ -1,5 +1,5 @@
-#ifndef __SHADER_PROGRAM_H__
-#define __SHADER_PROGRAM_H__
+#ifndef __MT_SHADER_PROGRAM_H__
+#define __MT_SHADER_PROGRAM_H__
 
 namespace mt {
 namespace graphic {
@@ -19,6 +19,7 @@ public:
 
 	// Variable
 	unsigned int programId;
+	std::vector<int> locations;
 
 	// Forward
 	ShaderProgram();
@@ -28,6 +29,16 @@ public:
 
 	// Native
 	void use();
+	void addLocation(std::string unifromName);
+	void setUnifrom(int locationId, bool value);
+	void setUnifrom(int locationId, int value);
+	void setUnifrom(int locationId, float value);
+	void setUnifrom(int locationId, glm::vec2 value);
+	void setUnifrom(int locationId, glm::ivec2 value);
+	void setUnifrom(int locationId, glm::vec3 value);
+	void setUnifrom(int locationId, glm::ivec3 value);
+	void setUnifrom(int locationId, glm::vec4 value);
+	void setUnifrom(int locationId, glm::mat4 value);
 
 private:
 

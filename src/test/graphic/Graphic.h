@@ -1,5 +1,5 @@
-#ifndef __GRAPHIC_H__
-#define __GRAPHIC_H__
+#ifndef __MT_GRAPHIC_H__
+#define __MT_GRAPHIC_H__
 
 namespace mt {
 namespace test {

@@ -1,4 +1,4 @@
-#define __CONFIG_CPP__
+#define __MT_CONFIG_CPP__
 
 #include "common.h"
 #include "Config.h"

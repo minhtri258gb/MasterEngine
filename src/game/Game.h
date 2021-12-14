@@ -1,5 +1,7 @@
-#ifndef __GAME_H__
-#define __GAME_H__
+#ifndef __MT_GAME_H__
+#define __MT_GAME_H__
+
+#include "maps/Map.h"
 
 namespace mt {
 namespace game {
@@ -7,6 +9,9 @@ namespace game {
 class Game {
 
 public:
+
+	// Variable
+	Map* map;
 
 	// Forward
 	Game();

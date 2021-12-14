@@ -1,8 +1,10 @@
-#ifndef __GRAPHIC_H__
-#define __GRAPHIC_H__
+#ifndef __MT_GRAPHIC_H__
+#define __MT_GRAPHIC_H__
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
+#include "models/ModelMgr.h"
 
 namespace mt {
 namespace graphic {
@@ -13,7 +15,7 @@ public:
 
 	// Variable
 	static Graphic ins;
-	GLFWwindow* gl_window;
+	ModelMgr modelMgr;
 
 	// Forward
 	Graphic();
@@ -28,6 +30,11 @@ public:
 	void renderPost();
 
 	// Stock
+
+private:
+
+	// Variable
+	GLFWwindow* gl_window;
 
 };
 

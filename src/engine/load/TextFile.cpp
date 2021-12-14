@@ -1,4 +1,6 @@
-#define __TEXT_FILE_CPP__
+#define __MT_TEXT_FILE_CPP__
+
+#include <sstream>
 
 #include "common.h"
 #include "TextFile.h"

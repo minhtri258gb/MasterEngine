@@ -1,4 +1,4 @@
-#define __GRAPHIC_CPP__
+#define __MT_GRAPHIC_CPP__
 
 #include <iostream>
 

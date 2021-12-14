@@ -1,7 +1,17 @@
 #version 330 core
-layout (location = 0) in vec3 position;
+
+layout (location = 0) in vec3 v_position;
+layout (location = 1) in vec2 v_texcoord;
+
+out vec2 f_texcoord;
+
+uniform mat4 view;
+uniform mat4 proj;
+uniform mat4 model;
 
 void main()
 {
-	gl_Position = vec4(position.x, position.y, position.z, 1.0f);
+	f_texcoord = v_texcoord;
+
+	gl_Position = model * vec4(v_position, 1.0f);
 }

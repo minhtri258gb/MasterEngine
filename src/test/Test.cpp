@@ -1,4 +1,4 @@
-#define __TEST_CPP__
+#define __MT_TEST_CPP__
 
 #include "common.h"
 #include "Test.h"

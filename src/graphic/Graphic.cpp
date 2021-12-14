@@ -1,4 +1,4 @@
-#define __GRAPHIC_CPP__
+#define __MT_GRAPHIC_CPP__
 
 #include "common.h"
 #include "Graphic.h"
@@ -47,10 +47,21 @@ void Graphic::init()
 	glViewport(0, 0, 800, 600);
 
 	glfwSetFramebufferSizeCallback(this->gl_window, framebuffer_size_callback);
+
+	// Init component
+	this->modelMgr.init();
+
+	// #EXTRA
 }
 
 void Graphic::close()
 {
+	// Close component
+	this->modelMgr.close();
+
+	// #EXTRA
+
+	// Close GLFW
 	glfwTerminate();
 }
 

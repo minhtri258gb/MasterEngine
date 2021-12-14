@@ -1,4 +1,4 @@
-#define __MAIN_CPP__
+#define __MT_MAIN_CPP__
 
 #include "common.h"
 #include "Game/Game.h"

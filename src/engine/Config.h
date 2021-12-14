@@ -1,5 +1,5 @@
-#ifndef __CONFIG_H__
-#define __CONFIG_H__
+#ifndef __MT_CONFIG_H__
+#define __MT_CONFIG_H__
 
 namespace mt {
 namespace engine {

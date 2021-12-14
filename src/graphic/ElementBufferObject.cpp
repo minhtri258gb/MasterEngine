@@ -1,4 +1,4 @@
-#define __ELEMENT_ARRAY_OBJECT_CPP__
+#define __MT_ELEMENT_ARRAY_OBJECT_CPP__
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

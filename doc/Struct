@@ -1,0 +1,20 @@
+
+engine
+	graphic
+		scene
+		screen
+		modelMgr
+			model
+			shader
+	physic
+		body
+	audio
+	network
+
+	map
+		enviroment
+		player
+		npc
+		entity
+			>model
+			>body

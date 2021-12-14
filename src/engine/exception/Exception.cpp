@@ -1,4 +1,4 @@
-#define __EXCEPTION_CPP__
+#define __MT_EXCEPTION_CPP__
 
 #include <sstream>
 

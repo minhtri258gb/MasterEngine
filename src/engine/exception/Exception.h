@@ -1,5 +1,5 @@
-#ifndef __EXCEPTION_H__
-#define __EXCEPTION_H__
+#ifndef __MT_EXCEPTION_H__
+#define __MT_EXCEPTION_H__
 
 namespace mt {
 namespace engine {
