@@ -10,6 +10,8 @@
 #include "ShaderProgram.h"
 #include "engine/Config.h"
 
+using namespace std;
+using namespace glm;
 using namespace mt::engine;
 using namespace mt::graphic;
 
@@ -22,7 +24,7 @@ ShaderProgram::~ShaderProgram()
 {
 }
 
-void ShaderProgram::init(std::string _filename, int _flag)
+void ShaderProgram::init(string _filename, int _flag)
 {
 	// Get config
 	_filename = Config::ins.shader_path + _filename;
@@ -65,7 +67,7 @@ void ShaderProgram::init(std::string _filename, int _flag)
 	glGetProgramiv(this->programId, GL_LINK_STATUS, &success);
 	if (!success) {
 		glGetProgramInfoLog(this->programId, 512, NULL, infoLog);
-		throw Exception(std::string("Failed to compile vertex shader: ")+infoLog, __FILE__, __LINE__);
+		throw Exception(string("Failed to compile vertex shader: ")+infoLog, __FILE__, __LINE__);
 	}
 }
 
@@ -81,7 +83,7 @@ void ShaderProgram::use()
 	glUseProgram(this->programId);
 }
 
-void ShaderProgram::addLocation(std::string _unifromName)
+void ShaderProgram::addLocation(string _unifromName)
 {
 	int location = glGetUniformLocation(this->programId, _unifromName.c_str());
 	this->locations.push_back(location);
@@ -102,49 +104,57 @@ void ShaderProgram::setUnifrom(int _locationId, float _value)
     glUniform1f(this->locations.at(_locationId), _value); 
 } 
 
-void ShaderProgram::setUnifrom(int _locationId, glm::vec2 _value)
+void ShaderProgram::setUnifrom(int _locationId, vec2 _value)
 {
 	glUniform2f(this->locations.at(_locationId), _value.x, _value.y);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, glm::ivec2 _value)
+void ShaderProgram::setUnifrom(int _locationId, ivec2 _value)
 {
 	glUniform2i(this->locations.at(_locationId), _value.x, _value.y);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, glm::vec3 _value)
+void ShaderProgram::setUnifrom(int _locationId, vec3 _value)
 {
 	glUniform3f(this->locations.at(_locationId), _value.x, _value.y, _value.z);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, glm::ivec3 _value)
+void ShaderProgram::setUnifrom(int _locationId, ivec3 _value)
 {
 	glUniform3i(this->locations.at(_locationId), _value.x, _value.y, _value.z);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, glm::vec4 _value)
+void ShaderProgram::setUnifrom(int _locationId, vec4 _value)
 {
 	glUniform4f(this->locations.at(_locationId), _value.x, _value.y, _value.z, _value.w);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, glm::mat4 _value)
+void ShaderProgram::setUnifrom(int _locationId, mat4 _value)
 {
-	glUniformMatrix4fv(this->locations.at(_locationId), 1, GL_FALSE, glm::value_ptr(_value));
+	glUniformMatrix4fv(this->locations.at(_locationId), 1, GL_FALSE, value_ptr(_value));
+	
+	// debug - begin
+	// cout << "=================\n";
+	// cout << _value[0][0] << " " << _value[0][1] << " " << _value[0][2] << " " << _value[0][3] << " " << endl;
+	// cout << _value[1][0] << " " << _value[1][1] << " " << _value[1][2] << " " << _value[1][3] << " " << endl;
+	// cout << _value[2][0] << " " << _value[2][1] << " " << _value[2][2] << " " << _value[2][3] << " " << endl;
+	// cout << _value[3][0] << " " << _value[3][1] << " " << _value[3][2] << " " << _value[3][3] << " " << endl;
+	// debug - end
 }
 
-unsigned int ShaderProgram::initShaderPath(std::string _filepath, SHADER_TYPE _type)
+unsigned int ShaderProgram::initShaderPath(string _filepath, SHADER_TYPE _type)
 {
 	// Read source
-	std::ifstream shaderFile;
+	ifstream shaderFile;
 	shaderFile.open(_filepath);
 	if (!shaderFile)
 		throw Exception("Unable to open file " + _filepath, __FILE__, __LINE__);
 
-	std::stringstream shaderStream;
+	stringstream shaderStream;
 	shaderStream << shaderFile.rdbuf();
 	shaderFile.close();
 	
-	std::string shaderSrc = shaderStream.str();
+	string shaderSrc = shaderStream.str();
 	const char* bufferSource = shaderSrc.c_str();
 
 	// Create shader

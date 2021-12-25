@@ -4,7 +4,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "ShaderProgramMgr.h"
 #include "models/ModelMgr.h"
+#include "Scene.h"
+#include "Screen.h"
 
 namespace mt {
 namespace graphic {
@@ -15,7 +18,11 @@ public:
 
 	// Variable
 	static Graphic ins;
+
+	ShaderProgramMgr shaderProgramMgr;
 	ModelMgr modelMgr;
+	Scene scene;
+	Screen screen;
 
 	// Forward
 	Graphic();
@@ -23,11 +30,13 @@ public:
 	void init();
 	void close();
 
-	// Native
-	bool checkWindow();
 	void processInput();
 	void renderPre();
 	void renderPost();
+
+	// Native
+	bool checkWindow();
+	void setDepthTest(bool value = true);
 
 	// Stock
 

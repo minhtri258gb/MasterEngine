@@ -26,7 +26,14 @@ void ModelBuilder::clear()
 
 Model* ModelBuilder::cache(std::string name)
 {
+	// Get available model
 	Model* model = Graphic::ins.modelMgr.getModel(name);
+
+	// Build default model
+	if (model == nullptr)
+		model = this->createDefaultModel(name);
+	
+	// Build model
 	if (model == nullptr)
 	{
 		// Create memory
@@ -74,6 +81,41 @@ Model* ModelBuilder::cache(std::string name)
 	}
 
 	return model;
+}
+
+Model* ModelBuilder::createDefaultModel(string _name)
+{
+	if (_name == "box")
+		return this->createBox();
+	
+	return nullptr;
+}
+
+Model* ModelBuilder::createBox()
+{
+	// SimpleModel *model = new SimpleModel();
+
+	// vector<vec3> vertices;
+	// vertices.push_back(vec3( 0.0f,  0.0f,   0.0f));
+	// vertices.push_back(vec3( 2.0f,  5.0f, -15.0f));
+	// vertices.push_back(vec3(-1.5f, -2.2f,  -2.5f));
+	// vertices.push_back(vec3(-3.8f, -2.0f, -12.3f));
+	// vertices.push_back(vec3( 2.4f, -0.4f,  -3.5f));
+	// vertices.push_back(vec3(-1.7f,  3.0f,  -7.5f));
+	// vertices.push_back(vec3( 1.3f, -2.0f,  -2.5f));
+	// vertices.push_back(vec3( 1.5f,  2.0f,  -2.5f));
+	// vertices.push_back(vec3( 1.5f,  0.2f,  -1.5f));
+	// vertices.push_back(vec3(-1.3f,  1.0f,  -1.5f));
+
+	// model->VAO.init();
+	// model->VAO.setCount(36);
+	// model->VAO.bind();
+	// model->VAO.addAttribute(vertices);
+	// model->VAO.unbind();
+
+	// #EXTRA
+
+	return nullptr;
 }
 
 

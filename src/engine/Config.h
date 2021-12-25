@@ -12,9 +12,16 @@ public:
 	// Variable
 	static Config ins;
 
-	// File Dir
+	// System
 	std::string resource_dir;
 	std::string shader_path;
+
+	// Window
+	int windowWidth;
+	int windowHeight;
+	std::string windowName;
+
+	// Camera
 
 	// Forward
 	Config();

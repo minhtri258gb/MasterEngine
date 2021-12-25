@@ -23,9 +23,9 @@ void SimpleModel::render()
 
 	// Model mattrix
 	mat4 matModel = mat4(1.0f);
-	matModel = translate(matModel, vec3(0.2f, 0.2f, 0.0f));
-	matModel = rotate(matModel, radians(45.0f), vec3(0.0, 0.0, 1.0));
-	matModel = scale(matModel, vec3(0.5, 0.5, 0.5));
+	// matModel = translate(matModel, vec3(0.2f, 0.2f, 0.0f));
+	// matModel = rotate(matModel, radians(45.0f), vec3(0.0, 0.0, 1.0));
+	// matModel = scale(matModel, vec3(0.5, 0.5, 0.5));
 	shader.setUnifrom(2, matModel);
 
 	// Texture

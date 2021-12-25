@@ -11,6 +11,7 @@ public:
 
 	// Variable
 	glm::mat4 proj;
+	glm::mat4 view;
 
 	// Forward
 	Scene();

@@ -6,7 +6,7 @@
 
 int main()
 {
-	#if 1 // ENGINE
+	#if 0 // ENGINE
 
 	mt::game::Game program;
 	program.run();

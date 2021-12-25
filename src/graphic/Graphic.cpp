@@ -1,8 +1,10 @@
 #define __MT_GRAPHIC_CPP__
 
 #include "common.h"
+#include "engine/Config.h"
 #include "Graphic.h"
 
+using namespace std;
 using namespace mt::engine;
 using namespace mt::graphic;
 
@@ -25,13 +27,19 @@ Graphic::~Graphic()
 
 void Graphic::init()
 {
+	// Data
+	int width = Config::ins.windowWidth;
+	int height = Config::ins.windowHeight;
+	string name = Config::ins.windowName;
+
+	// Init OpenGL
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-	this->gl_window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+	this->gl_window = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
 	if (this->gl_window == NULL)
 	{
 		glfwTerminate();
@@ -44,11 +52,23 @@ void Graphic::init()
 		throw Exception("Failed to initialize GLAD", __FILE__, __LINE__);
 	}
 
-	glViewport(0, 0, 800, 600);
+	glViewport(0, 0, width, height);
 
 	glfwSetFramebufferSizeCallback(this->gl_window, framebuffer_size_callback);
 
+	// Set default
+	this->setDepthTest();
+
 	// Init component
+	this->shaderProgramMgr.init();
+
+	// Init Scene
+	this->scene.init();
+
+	// Init Screen
+	this->screen.init();
+
+	// Init Model
 	this->modelMgr.init();
 
 	// #EXTRA
@@ -56,18 +76,16 @@ void Graphic::init()
 
 void Graphic::close()
 {
+	// Clear
+	this->modelMgr.clear();
+
 	// Close component
-	this->modelMgr.close();
+	this->shaderProgramMgr.close();
 
 	// #EXTRA
 
 	// Close GLFW
 	glfwTerminate();
-}
-
-bool Graphic::checkWindow()
-{
-	return !glfwWindowShouldClose(this->gl_window);
 }
 
 void Graphic::processInput()
@@ -79,11 +97,24 @@ void Graphic::processInput()
 void Graphic::renderPre()
 {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Graphic::renderPost()
 {
 	glfwPollEvents();    
 	glfwSwapBuffers(this->gl_window);
+}
+
+bool Graphic::checkWindow()
+{
+	return !glfwWindowShouldClose(this->gl_window);
+}
+
+void Graphic::setDepthTest(bool _value)
+{
+	if (_value)
+		glEnable(GL_DEPTH_TEST);
+	else
+		glDisable(GL_DEPTH_TEST);
 }

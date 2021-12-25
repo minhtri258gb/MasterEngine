@@ -1,8 +1,11 @@
 #define __MT_SCENE_CPP__
 
 #include "common.h"
+#include "engine/Config.h"
 #include "Scene.h"
+#include "Graphic.h"
 
+using namespace glm;
 using namespace mt::engine;
 using namespace mt::graphic;
 
@@ -16,7 +19,12 @@ Scene::~Scene()
 
 void Scene::init()
 {
-	int width = 800;
-	int height = 600;
-	this->proj = glm::perspective(glm::radians(45.0f), (float)width/(float)height, 0.1f, 100.0f);
+	float width = Config::ins.windowWidth;
+	float height = Config::ins.windowHeight;
+	this->proj = perspective(radians(45.0f), width/height, 0.1f, 100.0f);
+	// this->view = translate(mat4(1.0f), vec3(0.0f, 0.0f, -3.0f));
+	this->view = mat4(1.0f);
+
+	Graphic::ins.shaderProgramMgr.setSceneProj(this->proj);
+	Graphic::ins.shaderProgramMgr.setSceneView(this->view);
 }

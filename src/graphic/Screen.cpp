@@ -1,8 +1,10 @@
 #define __MT_SCREEN_CPP__
 
 #include "common.h"
+#include "engine/Config.h"
 #include "Screen.h"
 
+using namespace glm;
 using namespace mt::engine;
 using namespace mt::graphic;
 
@@ -16,5 +18,11 @@ Screen::~Screen()
 
 void Screen::init()
 {
-	this->proj = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, 0.1f, 100.0f);
+	// Data
+	int width = Config::ins.windowWidth;
+	int height = Config::ins.windowHeight;
+
+	// Variable
+	this->proj = ortho(0.0f, (float)width, 0.0f, (float)height, 0.1f, 100.0f);
+	this->view = mat4(1.0f);
 }

@@ -19,7 +19,7 @@ public:
 
 	// Stock
 
-private:
+protected:
 
 	// Variable
 	std::string message;

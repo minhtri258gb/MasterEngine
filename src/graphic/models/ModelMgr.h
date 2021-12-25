@@ -17,7 +17,7 @@ public:
 	ModelMgr();
 	~ModelMgr();
 	void init();
-	void close();
+	void clear();
 
 	// Native
 	Model* getModel(std::string name);

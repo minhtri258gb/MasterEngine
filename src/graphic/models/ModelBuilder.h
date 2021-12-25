@@ -23,6 +23,8 @@ public:
 private:
 
 	// Variable
+	Model* createDefaultModel(std::string name);
+	Model* createBox();
 
 };
 

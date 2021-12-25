@@ -11,7 +11,7 @@ Model::Model()
 
 Model::~Model()
 {
-	std::cout << "\033[0;31mERROR\033[0m: " << __FILE__ << ", " << __LINE__ << std::endl;
+	// std::cout << "\033[0;31mERROR\033[0m: " << __FILE__ << ", " << __LINE__ << std::endl;
 }
 
 void Model::render()

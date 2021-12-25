@@ -9,8 +9,6 @@ class Model
 
 public:
 
-	// Variable
-
 	// Forward
 	Model();
 	virtual ~Model();
