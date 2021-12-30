@@ -1,6 +1,9 @@
 #ifndef __MT_EXCEPTION_H__
 #define __MT_EXCEPTION_H__
 
+#define error(msg) Exception(msg,__FILE__,__LINE__)
+#define warning(msg) Exception(msg,__FILE__,__LINE__)
+
 namespace mt {
 namespace engine {
 

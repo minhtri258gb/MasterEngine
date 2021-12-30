@@ -67,7 +67,7 @@ void ShaderProgram::init(string _filename, int _flag)
 	glGetProgramiv(this->programId, GL_LINK_STATUS, &success);
 	if (!success) {
 		glGetProgramInfoLog(this->programId, 512, NULL, infoLog);
-		throw Exception(string("Failed to compile vertex shader: ")+infoLog, __FILE__, __LINE__);
+		throw error(string("Failed to compile vertex shader: ")+infoLog);
 	}
 }
 
@@ -148,7 +148,7 @@ unsigned int ShaderProgram::initShaderPath(string _filepath, SHADER_TYPE _type)
 	ifstream shaderFile;
 	shaderFile.open(_filepath);
 	if (!shaderFile)
-		throw Exception("Unable to open file " + _filepath, __FILE__, __LINE__);
+		throw error("Unable to open file " + _filepath);
 
 	stringstream shaderStream;
 	shaderStream << shaderFile.rdbuf();
@@ -182,7 +182,7 @@ unsigned int ShaderProgram::initShaderPath(string _filepath, SHADER_TYPE _type)
 	if (!success)
 	{
 		glGetShaderInfoLog(shaderId, 512, NULL, infoLog);
-		throw Exception("Failed to compile shader: "+_filepath+'\n'+infoLog, __FILE__, __LINE__);
+		throw error("Failed to compile shader: "+_filepath+'\n'+infoLog);
 	}
 
 	return shaderId;

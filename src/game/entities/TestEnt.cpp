@@ -2,9 +2,7 @@
 
 #include "common.h"
 // #include "engine/Engine.h"
-#include "graphic/models/ModelMgr.h"
-#include "graphic/models/Model.h"
-#include "graphic/models/ModelBuilder.h"
+#include "graphic/Graphic.h"
 // #include "module/physic/Physic.h"
 #include "TestEnt.h"
 
@@ -13,7 +11,7 @@ using namespace mt::game;
 
 TestEnt::TestEnt(std::string name)
 {
-	this->model = ModelBuilder::ins.cache("simple");
+	this->model = Graphic::ins.modelMgr.cache("box");
 }
 
 TestEnt::~TestEnt()

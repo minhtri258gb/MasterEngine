@@ -1,13 +1,11 @@
 #ifndef __MT_GRAPHIC_H__
 #define __MT_GRAPHIC_H__
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 #include "ShaderProgramMgr.h"
 #include "models/ModelMgr.h"
 #include "Scene.h"
 #include "Screen.h"
+#include "Camera.h"
 
 namespace mt {
 namespace graphic {
@@ -23,6 +21,7 @@ public:
 	ModelMgr modelMgr;
 	Scene scene;
 	Screen screen;
+	Camera camera;
 
 	// Forward
 	Graphic();
@@ -36,6 +35,7 @@ public:
 
 	// Native
 	bool checkWindow();
+	double getTime();
 	void setDepthTest(bool value = true);
 
 	// Stock
@@ -43,7 +43,8 @@ public:
 private:
 
 	// Variable
-	GLFWwindow* gl_window;
+	class GraphicImpl;
+	GraphicImpl* impl;
 
 };
 

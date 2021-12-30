@@ -2,30 +2,16 @@
 
 #include "common.h"
 #include "Test.h"
-#include "graphic/Graphic.h"
 #include "file/TestJson.h"
-#include "file/TestIni.h"
-#include "mod/PluginSystem.h"
+#include "audio/Audio.h"
+#include "technique/TestTechnique.h"
 
-using namespace mt::mod;
 using namespace mt::test;
-
-Test::Test()
-{
-
-}
-
-Test::~Test()
-{
-
-}
 
 void Test::run()
 {
-	// Graphic test; // pass
 	// TestJson test; // faild hien loi nhung build duoc
-	// TestIni test; // pass
-	PluginSystem test;
+	TestTechnique test;
 
 	test.run();
 }

@@ -27,8 +27,6 @@ public:
 	Config();
 	~Config();
 
-	// Native
-
 };
 
 }}

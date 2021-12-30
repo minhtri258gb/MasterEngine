@@ -11,7 +11,7 @@ TextFile::TextFile(std::string filename)
 {
 	this->file.open(filename);
 	if (!this->file)
-		throw Exception("Unable to open file " + filename, __FILE__, __LINE__);
+		throw error("Unable to open file " + filename);
 }
 
 TextFile::~TextFile()

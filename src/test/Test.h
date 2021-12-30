@@ -9,8 +9,6 @@ class Test {
 public:
 
 	// Forward
-	Test();
-	~Test();
 	void run();
 
 	// Native

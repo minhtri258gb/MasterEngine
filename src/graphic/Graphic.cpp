@@ -1,7 +1,11 @@
 #define __MT_GRAPHIC_CPP__
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 #include "common.h"
 #include "engine/Config.h"
+#include "engine/Input.h"
 #include "Graphic.h"
 
 using namespace std;
@@ -10,19 +14,64 @@ using namespace mt::graphic;
 
 Graphic Graphic::ins;
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+class Graphic::GraphicImpl
+{
+public:
+	GLFWwindow* gl_window;
+};
+
+void cbk_framebuffer_size(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 }
 
+void cbk_cursor_pos(GLFWwindow *window, double xpos, double ypos)
+{
+	Input::ins.cursorPos(xpos, ypos);
+}
+
+void cbk_key(GLFWwindow *window, int key, int scancode, int action, int mods)
+{
+	// cout << key << endl;
+
+	if(key == -1)
+		return;
+	if(action == GLFW_PRESS)
+		Input::ins.keyPress(key, true);
+	else if(action == GLFW_RELEASE)
+		Input::ins.keyPress(key, false);
+}
+
+void cbk_mouse_button(GLFWwindow *window, int button, int action, int mods)
+{
+	bool press;
+	switch (action) {
+	case GLFW_PRESS:
+		press = true;
+		break;
+	case GLFW_RELEASE:
+		press = false;
+		break;
+	default:
+		return;
+	}
+
+	if(button > 2)
+		return;
+
+	Input::ins.keyPress(351 + button, press);
+}
+
 Graphic::Graphic()
 {
-
+	// Impliment
+	this->impl = new GraphicImpl();
 }
 
 Graphic::~Graphic()
 {
-
+	// Impliment
+	delete this->impl;
 }
 
 void Graphic::init()
@@ -39,22 +88,28 @@ void Graphic::init()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-	this->gl_window = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
-	if (this->gl_window == NULL)
+	this->impl->gl_window = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
+	if (this->impl->gl_window == NULL)
 	{
 		glfwTerminate();
-		throw Exception("Failed to create GLFW window", __FILE__, __LINE__);
+		throw error("Failed to create GLFW window");
 	}
-	glfwMakeContextCurrent(this->gl_window);
+	glfwMakeContextCurrent(this->impl->gl_window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
-		throw Exception("Failed to initialize GLAD", __FILE__, __LINE__);
+		throw error("Failed to initialize GLAD");
 	}
 
 	glViewport(0, 0, width, height);
 
-	glfwSetFramebufferSizeCallback(this->gl_window, framebuffer_size_callback);
+	glfwSetFramebufferSizeCallback(this->impl->gl_window, cbk_framebuffer_size);
+	glfwSetCursorPosCallback(this->impl->gl_window, cbk_cursor_pos);
+	glfwSetKeyCallback(this->impl->gl_window, cbk_key);
+	glfwSetMouseButtonCallback(this->impl->gl_window, cbk_mouse_button);
+
+	glfwSetInputMode(this->impl->gl_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(this->impl->gl_window, GLFW_STICKY_KEYS, GLFW_TRUE);
 
 	// Set default
 	this->setDepthTest();
@@ -90,8 +145,8 @@ void Graphic::close()
 
 void Graphic::processInput()
 {
-	if(glfwGetKey(this->gl_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(this->gl_window, true);
+	if(glfwGetKey(this->impl->gl_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(this->impl->gl_window, true);
 }
 
 void Graphic::renderPre()
@@ -102,13 +157,19 @@ void Graphic::renderPre()
 
 void Graphic::renderPost()
 {
-	glfwPollEvents();    
-	glfwSwapBuffers(this->gl_window);
+	Input::ins.resetStatus(); // end frame key press
+	glfwPollEvents(); // start frame key press
+	glfwSwapBuffers(this->impl->gl_window);
 }
 
 bool Graphic::checkWindow()
 {
-	return !glfwWindowShouldClose(this->gl_window);
+	return !glfwWindowShouldClose(this->impl->gl_window);
+}
+
+double Graphic::getTime()
+{
+	return glfwGetTime();
 }
 
 void Graphic::setDepthTest(bool _value)

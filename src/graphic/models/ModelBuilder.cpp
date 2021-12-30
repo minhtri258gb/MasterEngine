@@ -9,32 +9,28 @@ using namespace std;
 using namespace glm;
 using namespace mt::graphic;
 
-ModelBuilder ModelBuilder::ins;
+class ModelBuilder::ModelBuilderImpl
+{
+public:
+	
+};
 
 ModelBuilder::ModelBuilder()
 {
+	// Implement
+	this->impl = new ModelBuilderImpl();
 }
 
 ModelBuilder::~ModelBuilder()
 {
+	// Implement
+	delete this->impl;
 }
 
-void ModelBuilder::clear()
+Model* ModelBuilder::loadModel(std::string name)
 {
-
-}
-
-Model* ModelBuilder::cache(std::string name)
-{
-	// Get available model
-	Model* model = Graphic::ins.modelMgr.getModel(name);
-
-	// Build default model
-	if (model == nullptr)
-		model = this->createDefaultModel(name);
-	
-	// Build model
-	if (model == nullptr)
+	Model* model = this->createDefaultModel(name);
+	if (!model)
 	{
 		// Create memory
 		SimpleModel *newModel = new SimpleModel();
@@ -76,10 +72,7 @@ Model* ModelBuilder::cache(std::string name)
 
 		// Override class
 		model = newModel;
-
-		Graphic::ins.modelMgr.addModel(name, model);
 	}
-
 	return model;
 }
 
@@ -93,30 +86,51 @@ Model* ModelBuilder::createDefaultModel(string _name)
 
 Model* ModelBuilder::createBox()
 {
-	// SimpleModel *model = new SimpleModel();
+	SimpleModel *model = new SimpleModel();
 
-	// vector<vec3> vertices;
-	// vertices.push_back(vec3( 0.0f,  0.0f,   0.0f));
-	// vertices.push_back(vec3( 2.0f,  5.0f, -15.0f));
-	// vertices.push_back(vec3(-1.5f, -2.2f,  -2.5f));
-	// vertices.push_back(vec3(-3.8f, -2.0f, -12.3f));
-	// vertices.push_back(vec3( 2.4f, -0.4f,  -3.5f));
-	// vertices.push_back(vec3(-1.7f,  3.0f,  -7.5f));
-	// vertices.push_back(vec3( 1.3f, -2.0f,  -2.5f));
-	// vertices.push_back(vec3( 1.5f,  2.0f,  -2.5f));
-	// vertices.push_back(vec3( 1.5f,  0.2f,  -1.5f));
-	// vertices.push_back(vec3(-1.3f,  1.0f,  -1.5f));
+	vector<vec3> vertices;
+	vertices.push_back(vec3( 2.0f,  2.0f,  2.0f));
+	vertices.push_back(vec3( 2.0f,  2.0f, -2.0f));
+	vertices.push_back(vec3( 2.0f, -2.0f,  2.0f));
+	vertices.push_back(vec3( 2.0f, -2.0f, -2.0f));
+	vertices.push_back(vec3(-2.0f,  2.0f,  2.0f));
+	vertices.push_back(vec3(-2.0f,  2.0f, -2.0f));
+	vertices.push_back(vec3(-2.0f, -2.0f,  2.0f));
+	vertices.push_back(vec3(-2.0f, -2.0f, -2.0f));
+	
+	// vector<vec2> texcoords;
+	// texcoords.push_back(vec2(1.0f, 1.0f));
+	// texcoords.push_back(vec2(1.0f, 0.0f));
+	// texcoords.push_back(vec2(1.0f, 1.0f));
+	// texcoords.push_back(vec2(1.0f, 0.0f));
+	
+	// texcoords.push_back(vec2(0.0f, 1.0f));
+	// texcoords.push_back(vec2(0.0f, 0.0f));
+	// texcoords.push_back(vec2(0.0f, 1.0f));
+	// texcoords.push_back(vec2(0.0f, 0.0f));
 
-	// model->VAO.init();
-	// model->VAO.setCount(36);
-	// model->VAO.bind();
-	// model->VAO.addAttribute(vertices);
-	// model->VAO.unbind();
+	vector<unsigned int> indices;
+	indices.push_back(0); indices.push_back(1); indices.push_back(3);
+	indices.push_back(0); indices.push_back(3); indices.push_back(2);
+	indices.push_back(6); indices.push_back(7); indices.push_back(5);
+	indices.push_back(6); indices.push_back(5); indices.push_back(4);
+	indices.push_back(2); indices.push_back(3); indices.push_back(7);
+	indices.push_back(2); indices.push_back(7); indices.push_back(6);
+	indices.push_back(4); indices.push_back(5); indices.push_back(1);
+	indices.push_back(4); indices.push_back(1); indices.push_back(0);
+	indices.push_back(6); indices.push_back(4); indices.push_back(0);
+	indices.push_back(6); indices.push_back(0); indices.push_back(2);
+	indices.push_back(5); indices.push_back(7); indices.push_back(3);
+	indices.push_back(5); indices.push_back(3); indices.push_back(1);
+	
+	model->VAO.init();
+	model->VAO.bind();
+	model->VAO.addAttribute(vertices);
+	// model->VAO.addAttribute(texcoords);
+	model->VAO.addIndices(indices);
+	model->VAO.unbind();
 
-	// #EXTRA
+	// model->texture.init("../res/textures/default.png");
 
-	return nullptr;
+	return model;
 }
-
-
-

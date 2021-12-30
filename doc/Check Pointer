@@ -1,0 +1,8 @@
+if(dynamic_cast<DerivedClass1*>(ptr))
+{
+  // Points to DerivedClass1
+}
+else if(dynamic_cast<DerivedClass2*>(ptr)
+{
+  // Points to DerivedClass2
+}

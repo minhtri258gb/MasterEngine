@@ -1,0 +1,15 @@
+
+mod/<mod_name>/<mod_name>.dll
+
+
+- Entity
+
+- Model
+
+- Map
+
+- Character
+
+- Item
+
+- Weapon

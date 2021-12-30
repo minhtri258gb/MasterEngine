@@ -6,17 +6,13 @@
 
 int main()
 {
-	#if 0 // ENGINE
-
-	mt::game::Game program;
-	program.run();
-
-	#else // TEST
-
-	mt::test::Test program;
-	program.run();
-
+	#if 1
+	mt::game::Game program; // ENGINE
+	#else
+	mt::test::Test program; // TEST
 	#endif
+	
+	program.run();
 
 	return 0;
 }

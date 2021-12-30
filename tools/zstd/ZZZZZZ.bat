@@ -1,0 +1,1 @@
+zstd.exe -D dictionaryName.abc --decompress "%~1"

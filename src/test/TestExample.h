@@ -4,8 +4,8 @@
 namespace mt {
 namespace test {
 
-class TestExample {
-
+class TestExample
+{
 public:
 
 	// Forward

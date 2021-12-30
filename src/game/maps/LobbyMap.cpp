@@ -145,7 +145,8 @@ void LobbyMap::load()
 	// this->lstEntitiesDynamic.push_back(sphereEnt);
 
 	// Test Entity
-	this->lstEntitiesStatic.push_back(new TestEnt("test"));
+	// this->lstEntitiesStatic.push_back(new TestEnt("test"));
+	this->lstEntitiesStatic.push_back(new TestEnt("box"));
 
 	// #EXTRA
 }

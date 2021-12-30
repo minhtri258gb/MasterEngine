@@ -7,15 +7,29 @@ link_directories(./lib)
 link_directories(./bin)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+# set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/../lib)
 
 add_library(engine #SHARED
 ./src/engine/library.cpp
 ./src/engine/Config.h
 ./src/engine/Config.cpp
+./src/engine/enumKey.h
+./src/engine/Input.h
+./src/engine/Input.cpp
+./src/engine/Timer.h
+./src/engine/Timer.cpp
+./src/engine/datatype/Flag32.h
+./src/engine/datatype/Flag32.cpp
 ./src/engine/exception/Exception.h
 ./src/engine/exception/Exception.cpp
+./src/engine/exception/LoadException.h
+./src/engine/exception/LoadException.cpp
 ./src/engine/load/TextFile.h
 ./src/engine/load/TextFile.cpp
+./src/engine/load/FileIni.h
+./src/engine/load/FileIni.cpp
+./src/engine/utils/StringUtils.h
+./src/engine/utils/StringUtils.cpp
 )
 
 add_library(graphic #SHARED
@@ -30,6 +44,8 @@ add_library(graphic #SHARED
 ./src/graphic/Camera.cpp
 ./src/graphic/ShaderProgram.h
 ./src/graphic/ShaderProgram.cpp
+./src/graphic/ShaderProgramMgr.h
+./src/graphic/ShaderProgramMgr.cpp
 ./src/graphic/VertexArrayObject.h
 ./src/graphic/VertexArrayObject.cpp
 ./src/graphic/VertexBufferObject.h
@@ -47,12 +63,23 @@ add_library(graphic #SHARED
 ./src/graphic/models/Model.cpp
 ./src/graphic/models/SimpleModel.h
 ./src/graphic/models/SimpleModel.cpp
+
+./src/graphic/models/animation/AnimationModel.h
+./src/graphic/models/animation/AnimationModel.cpp
+./src/graphic/models/animation/math_3d.cpp
+
+./src/graphic/models/iqm/IqmModel.h
+./src/graphic/models/iqm/IqmModel.cpp
+./src/graphic/models/iqm/iqm.h
+./src/graphic/models/iqm/iqm.cpp
 )
-target_link_libraries(graphic engine glfw3)
+target_link_libraries(graphic engine assimp glfw3)
 
 add_library(game #SHARED
 ./src/game/Game.h
 ./src/game/Game.cpp
+./src/game/Command.h
+./src/game/Command.cpp
 
 ./src/game/maps/Map.h
 ./src/game/maps/Map.cpp
@@ -66,20 +93,56 @@ add_library(game #SHARED
 )
 target_link_libraries(game graphic)
 
+add_library(mod #SHARED
+./src/mod/PluginBase.h
+./src/mod/Plugin.h
+./src/mod/Plugin.cpp
+./src/mod/PluginSystem.h
+./src/mod/PluginSystem.cpp
+)
+
 add_library(test #SHARED
 ./src/test/Test.h
 ./src/test/Test.cpp
 
-./src/graphic/glad.c
-./src/test/graphic/Graphic.h
-./src/test/graphic/Graphic.cpp
+# ./src/test/file/TestJson.h
+# ./src/test/file/TestJson.cpp
+# ./src/test/file/FileJson.h
+# ./src/test/file/FileJson.cpp
+
+./src/test/audio/Audio.h
+./src/test/audio/Audio.cpp
+./src/test/audio/AudioMgr.h
+./src/test/audio/AudioMgr.cpp
+./src/test/audio/Sound.h
+./src/test/audio/Sound.cpp
+
+./src/test/technique/TestTechnique.h
+./src/test/technique/TestTechnique.cpp
 )
-target_link_libraries(test glfw3)
+target_link_libraries(test mod engine graphic bass)
 
 add_executable(main
 ./src/main.cpp
 )
 target_link_libraries(main test game)
+
+
+# add_library(plugin1 SHARED ./src/mod/Plugin1.cpp)
+# target_link_libraries(plugin1 game engine graphic)
+# set_target_properties(plugin1 PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/plugins)
+# set_target_properties(plugin1 PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/plugins)
+
+# add_library(plugin2 SHARED ./src/mod/Plugin2.cpp)
+# target_link_libraries(plugin2 game engine graphic)
+# set_target_properties(plugin2 PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/plugins)
+# set_target_properties(plugin2 PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/plugins)
+
+# add_library(plugin3 SHARED ./src/mod/Plugin3.cpp)
+# target_link_libraries(plugin3 game engine graphic)
+# set_target_properties(plugin3 PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/plugins)
+# set_target_properties(plugin3 PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/plugins)
+
 
 # -l -lGL -lX11 -lpthread -lXrandr -lXi -ldl
 

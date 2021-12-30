@@ -2,6 +2,7 @@
 
 #include "common.h"
 #include "ModelMgr.h"
+#include "ModelBuilder.h"
 #include "SimpleModel.h"
 
 using namespace std;
@@ -25,10 +26,20 @@ void ModelMgr::clear()
 	// Clear Model
 	map<string, Model*>::iterator it;
 	for (it = this->models.begin(); it != this->models.end(); it++)
-	{
 		delete it->second;
-	}
 	this->models.clear();
+}
+
+Model* ModelMgr::cache(string name)
+{
+	// Get available model
+	Model* model = this->getModel(name);
+	if (!model)
+	{
+		model = this->builder.loadModel(name);
+		this->addModel(name, model);
+	}
+	return model;
 }
 
 Model* ModelMgr::getModel(string name)
