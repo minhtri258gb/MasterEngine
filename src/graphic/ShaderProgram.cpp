@@ -104,32 +104,32 @@ void ShaderProgram::setUnifrom(int _locationId, float _value)
     glUniform1f(this->locations.at(_locationId), _value); 
 } 
 
-void ShaderProgram::setUnifrom(int _locationId, vec2 _value)
+void ShaderProgram::setUnifrom(int _locationId, vec2 &_value)
 {
 	glUniform2f(this->locations.at(_locationId), _value.x, _value.y);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, ivec2 _value)
+void ShaderProgram::setUnifrom(int _locationId, ivec2 &_value)
 {
 	glUniform2i(this->locations.at(_locationId), _value.x, _value.y);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, vec3 _value)
+void ShaderProgram::setUnifrom(int _locationId, vec3 &_value)
 {
 	glUniform3f(this->locations.at(_locationId), _value.x, _value.y, _value.z);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, ivec3 _value)
+void ShaderProgram::setUnifrom(int _locationId, ivec3 &_value)
 {
 	glUniform3i(this->locations.at(_locationId), _value.x, _value.y, _value.z);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, vec4 _value)
+void ShaderProgram::setUnifrom(int _locationId, vec4 &_value)
 {
 	glUniform4f(this->locations.at(_locationId), _value.x, _value.y, _value.z, _value.w);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, mat4 _value)
+void ShaderProgram::setUnifrom(int _locationId, mat4 &_value)
 {
 	glUniformMatrix4fv(this->locations.at(_locationId), 1, GL_FALSE, value_ptr(_value));
 	
@@ -140,6 +140,11 @@ void ShaderProgram::setUnifrom(int _locationId, mat4 _value)
 	// cout << _value[2][0] << " " << _value[2][1] << " " << _value[2][2] << " " << _value[2][3] << " " << endl;
 	// cout << _value[3][0] << " " << _value[3][1] << " " << _value[3][2] << " " << _value[3][3] << " " << endl;
 	// debug - end
+}
+
+void ShaderProgram::setUniform(int _locationId, std::vector<glm::mat4> &_value)
+{
+	glUniformMatrix4fv(this->locations.at(_locationId), _value.size(), GL_FALSE, value_ptr(_value[0]));
 }
 
 unsigned int ShaderProgram::initShaderPath(string _filepath, SHADER_TYPE _type)

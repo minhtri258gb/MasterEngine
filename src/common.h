@@ -11,6 +11,8 @@
 
 #include "engine/exception/Exception.h"
 
-// #ADD
+typedef unsigned int uint;
+
+// #EXTRA
 
 #endif

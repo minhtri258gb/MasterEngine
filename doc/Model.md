@@ -6,5 +6,3 @@
 	- IQM - nhẹ - gọn
 - Static
 	- OBJ - ok - văn bản - nặng
-
-

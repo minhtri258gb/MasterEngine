@@ -10,6 +10,8 @@
 // #include "craft/entities/SphereEnt.h"
 // #include "utils/random/RandomNumber.h"
 #include "../entities/TestEnt.h"
+#include "../entities/GroundEnt.h"
+#include "../entities/TestAnimEnt.h"
 
 using namespace std;
 using namespace mt::graphic;
@@ -146,7 +148,11 @@ void LobbyMap::load()
 
 	// Test Entity
 	// this->lstEntitiesStatic.push_back(new TestEnt("test"));
-	this->lstEntitiesStatic.push_back(new TestEnt("box"));
+	// this->lstEntitiesStatic.push_back(new TestEnt("box"));
+	this->lstEntitiesStatic.push_back(new GroundEnt("matdat"));
+
+	// Test animation model
+	this->lstEntitiesStatic.push_back(new TestAnimEnt("asd"));
 
 	// #EXTRA
 }

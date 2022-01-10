@@ -19,6 +19,7 @@ public:
 	Model* loadModel(std::string name);
 	Model* createDefaultModel(std::string name);
 	Model* createBox();
+	Model* createPlane();
 
 private:
 

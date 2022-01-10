@@ -18,6 +18,7 @@ public:
 	void init(int location, std::vector<glm::vec2> vertices);
 	void init(int location, std::vector<glm::vec3> vertices);
 	void init(int location, std::vector<glm::vec4> vertices);
+	void init(int location, std::vector<glm::ivec4> vertices);
 	void close();
 
 	// Native

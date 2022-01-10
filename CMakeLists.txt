@@ -66,12 +66,7 @@ add_library(graphic #SHARED
 
 ./src/graphic/models/animation/AnimationModel.h
 ./src/graphic/models/animation/AnimationModel.cpp
-./src/graphic/models/animation/math_3d.cpp
 
-./src/graphic/models/iqm/IqmModel.h
-./src/graphic/models/iqm/IqmModel.cpp
-./src/graphic/models/iqm/iqm.h
-./src/graphic/models/iqm/iqm.cpp
 )
 target_link_libraries(graphic engine assimp glfw3)
 
@@ -90,6 +85,10 @@ add_library(game #SHARED
 ./src/game/entities/Entity.cpp
 ./src/game/entities/TestEnt.h
 ./src/game/entities/TestEnt.cpp
+./src/game/entities/TestAnimEnt.h
+./src/game/entities/TestAnimEnt.cpp
+./src/game/entities/GroundEnt.h
+./src/game/entities/GroundEnt.cpp
 )
 target_link_libraries(game graphic)
 
@@ -119,6 +118,10 @@ add_library(test #SHARED
 
 ./src/test/technique/TestTechnique.h
 ./src/test/technique/TestTechnique.cpp
+
+./src/test/thread/Thread.h
+./src/test/thread/Thread.cpp
+
 )
 target_link_libraries(test mod engine graphic bass)
 

@@ -33,12 +33,13 @@ public:
 	void setUnifrom(int locationId, bool value);
 	void setUnifrom(int locationId, int value);
 	void setUnifrom(int locationId, float value);
-	void setUnifrom(int locationId, glm::vec2 value);
-	void setUnifrom(int locationId, glm::ivec2 value);
-	void setUnifrom(int locationId, glm::vec3 value);
-	void setUnifrom(int locationId, glm::ivec3 value);
-	void setUnifrom(int locationId, glm::vec4 value);
-	void setUnifrom(int locationId, glm::mat4 value);
+	void setUnifrom(int locationId, glm::vec2 &value);
+	void setUnifrom(int locationId, glm::ivec2 &value);
+	void setUnifrom(int locationId, glm::vec3 &value);
+	void setUnifrom(int locationId, glm::ivec3 &value);
+	void setUnifrom(int locationId, glm::vec4 &value);
+	void setUnifrom(int locationId, glm::mat4 &value);
+	void setUniform(int locationId, std::vector<glm::mat4> &value);
 
 private:
 

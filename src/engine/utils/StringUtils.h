@@ -12,6 +12,7 @@ public:
 
 	// Native
 	static int parseInt(std::string);
+	// static std::string format(char *fmt, ...);
 
 	// Stock
 

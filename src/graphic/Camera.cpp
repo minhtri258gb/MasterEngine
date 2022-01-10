@@ -18,7 +18,7 @@ Camera::Camera()
 	this->forward = vec3(0,0,-1);
 	this->position = vec3();
 	this->velocity = vec3();
-	this->angle.y = 1;
+	this->angle = quat(0,0,1,0);
 }
 
 Camera::~Camera()
@@ -43,17 +43,20 @@ void Camera::update()
 		if(tmp.x * tmp.x + tmp.z * tmp.z < 0.48f)
 			this->angle = tmp;
 
-		normalize(this->angle);
+		this->angle = normalize(this->angle);
 
 		// Update matrix view
 		this->forward = vec3(	2.0f * (this->angle.x*this->angle.z - this->angle.y*this->angle.w),
-						2.0f * (this->angle.y*this->angle.z + this->angle.x*this->angle.w),
-						1.0f - 2.0f * (this->angle.x*this->angle.x + this->angle.y*this->angle.y));
+								2.0f * (this->angle.y*this->angle.z + this->angle.x*this->angle.w),
+								1.0f - 2.0f * (this->angle.x*this->angle.x + this->angle.y*this->angle.y)
+						);
 
 		this->right = cross(this->forward, vec3(0,1,0));
-		normalize(this->right);
+		this->right = normalize(this->right);
 
 		updateView = true;
+
+		// cout << this->angle.x << " " << this->angle.y << " " << this->angle.z << " " << this->angle.w << endl;
 		
 		// Update frustum culling
 		// this->frustumCulling.update();
@@ -88,6 +91,8 @@ void Camera::update()
 		this->position += this->velocity * Timer::ins.getTimePassed();
 		this->velocity = vec3();
 
+		// cout << this->position.x << " " << this->position.y << " " << this->position.z << endl;
+		
 		updateView = true;
 	}
 	

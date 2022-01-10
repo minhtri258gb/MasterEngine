@@ -12,7 +12,6 @@
 #include "game/maps/LobbyMap.h"
 
 // #include "graphic/models/animation/AnimationModel.h"
-#include "graphic/models/iqm/IqmModel.h"
 
 using namespace std;
 using namespace glm;
@@ -64,7 +63,7 @@ void Game::run()
 		cout << __FILE__ << " | " << __LINE__ << '\n';
 		#endif
 	
-		cerr << e.getMessage() << '\n';
+		cerr << "[ERROR]: " << e.getMessage() << '\n';
 	}
 	catch (std::exception e)
 	{
@@ -73,7 +72,7 @@ void Game::run()
 		cout << __FILE__ << " | " << __LINE__ << '\n';
 		#endif
 	
-		cerr << e.what() << '\n';
+		cerr << "[ERROR]: " << e.what() << '\n';
 	}
 	
 	#ifdef LOG

@@ -56,6 +56,14 @@ void VertexArrayObject::addAttribute(std::vector<glm::vec4> data)
 	VBOs.push_back(VBO);
 }
 
+void VertexArrayObject::addAttribute(std::vector<glm::ivec4> data)
+{
+	int location = VBOs.size();
+	VertexBufferObject* VBO = new VertexBufferObject();
+	VBO->init(location, data);
+	VBOs.push_back(VBO);
+}
+
 void VertexArrayObject::addIndices(std::vector<unsigned int> indices)
 {
 	this->count = indices.size();

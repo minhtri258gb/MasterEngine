@@ -22,6 +22,7 @@ public:
 	void addAttribute(std::vector<glm::vec2> data);
 	void addAttribute(std::vector<glm::vec3> data);
 	void addAttribute(std::vector<glm::vec4> data);
+	void addAttribute(std::vector<glm::ivec4> data);
 	void addIndices(std::vector<unsigned int> indices);
 
 	// Native

@@ -1,27 +1,35 @@
+#ifndef __MT_ANIMATION_MODEL_H__
+#define	__MT_ANIMATION_MODEL_H__
 
-#ifndef OGLDEV_SKINNED_MESH_H
-#define	OGLDEV_SKINNED_MESH_H
+#include "../../ShaderProgram.h"
+// #include "../ModelBuilder.h"
 
-using namespace std;
+namespace mt {
+namespace graphic {
 
-class SkinnedMesh
+class AnimationModel
 {
 public:
-    SkinnedMesh();
 
-    ~SkinnedMesh();
+    // Variable
+	static ShaderProgram shader;
+	// friend class ModelBuilder;
 
-    bool LoadMesh(const string& Filename);
+    // Forwards
+    AnimationModel();
+    ~AnimationModel();
+    // bool init(const std::string& filename);
+    void update();
+    void render();
 
-    void Render();
-	
-    unsigned int NumBones() const;
-    
-    void BoneTransform(float TimeInSeconds); // , vector<Matrix4f>& Transforms
-    
 private:
-    class SkinnedMeshImpl;
-    SkinnedMeshImpl* impl;
+
+    // Variable
+    class AnimationModelImpl;
+    AnimationModelImpl* impl;
+    
 };
+
+}}
 
 #endif

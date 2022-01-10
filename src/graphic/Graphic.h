@@ -39,6 +39,9 @@ public:
 	void setDepthTest(bool value = true);
 
 	// Stock
+	void cullFaceToogle(bool);
+	void cullFaceBack(bool);
+	void cullFaceClock(bool);
 
 private:
 

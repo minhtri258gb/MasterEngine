@@ -5,13 +5,15 @@
 #include "file/TestJson.h"
 #include "audio/Audio.h"
 #include "technique/TestTechnique.h"
+#include "thread/Thread.h"
 
 using namespace mt::test;
 
 void Test::run()
 {
 	// TestJson test; // faild hien loi nhung build duoc
-	TestTechnique test;
+	// TestTechnique test;
+	Thread test;
 
 	test.run();
 }

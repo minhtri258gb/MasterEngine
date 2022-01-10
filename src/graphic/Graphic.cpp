@@ -83,8 +83,8 @@ void Graphic::init()
 
 	// Init OpenGL
 	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
@@ -112,6 +112,10 @@ void Graphic::init()
 	glfwSetInputMode(this->impl->gl_window, GLFW_STICKY_KEYS, GLFW_TRUE);
 
 	// Set default
+	glfwSetCursorPos(this->impl->gl_window, 0, 0);
+	this->cullFaceToogle(true);
+	this->cullFaceBack(true);
+	this->cullFaceClock(true);
 	this->setDepthTest();
 
 	// Init component
@@ -170,6 +174,30 @@ bool Graphic::checkWindow()
 double Graphic::getTime()
 {
 	return glfwGetTime();
+}
+
+void Graphic::cullFaceToogle(bool _value)
+{
+	if (_value)
+		glEnable(GL_CULL_FACE);
+	else
+		glDisable(GL_CULL_FACE);
+}
+
+void Graphic::cullFaceBack(bool _value)
+{
+	if (_value)
+		glCullFace(GL_BACK);
+	else
+		glCullFace(GL_FRONT);
+}
+
+void Graphic::cullFaceClock(bool _value)
+{
+	if (_value)
+		glFrontFace(GL_CCW);
+	else
+		glFrontFace(GL_CW);
 }
 
 void Graphic::setDepthTest(bool _value)

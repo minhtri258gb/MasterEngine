@@ -55,6 +55,18 @@ void VertexBufferObject::init(int location, std::vector<glm::vec4> _vertices)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+void VertexBufferObject::init(int location, std::vector<glm::ivec4> _vertices)
+{
+	glGenBuffers(1, &this->gl_VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, this->gl_VBO);
+	glBufferData(GL_ARRAY_BUFFER, 16 * _vertices.size(), &_vertices[0], GL_STATIC_DRAW);
+
+	glVertexAttribIPointer(location, 4, GL_INT, 16, (void*)0);
+	glEnableVertexAttribArray(location);
+	
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
 void VertexBufferObject::close()
 {
 	// #TODO
