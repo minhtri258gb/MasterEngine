@@ -5,7 +5,7 @@
 #include "Scene.h"
 #include "Graphic.h"
 
-using namespace glm;
+using namespace mt;
 using namespace mt::engine;
 using namespace mt::graphic;
 
@@ -21,12 +21,10 @@ void Scene::init()
 {
 	float width = Config::ins.windowWidth;
 	float height = Config::ins.windowHeight;
-	this->proj = perspective(radians(80.0f), width/height, 0.01f, 100.0f);
-	// this->proj = perspective(80.0f, width/height, 0.01f, 100.0f);
-	// this->proj = mat4(1.0f);
-	// this->view = translate(mat4(1.0f), vec3(0.0f, 0.0f, -3.0f));
-	this->view = mat4(1.0f);
 
-	Graphic::ins.shaderProgramMgr.setSceneProj(this->proj);
-	Graphic::ins.shaderProgramMgr.setSceneView(this->view);
+	this->proj.perspective(Math::toRadian(80.0), width/height, 0.01f, 100.0f);
+	this->view = mat4();
+
+	Graphic::ins.shaderProgramMgr.setSceneProj(proj);
+	Graphic::ins.shaderProgramMgr.setSceneView(view);
 }

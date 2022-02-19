@@ -5,7 +5,7 @@
 #include "common.h"
 #include "LoadException.h"
 
-using namespace mt::engine;
+using namespace mt;
 
 LoadException::LoadException()
 {

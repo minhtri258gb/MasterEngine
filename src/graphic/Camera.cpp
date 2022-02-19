@@ -7,7 +7,7 @@
 #include "Camera.h"
 
 using namespace std;
-using namespace glm;
+using namespace mt;
 using namespace mt::engine;
 using namespace mt::graphic;
 
@@ -18,7 +18,7 @@ Camera::Camera()
 	this->forward = vec3(0,0,-1);
 	this->position = vec3();
 	this->velocity = vec3();
-	this->angle = quat(0,0,1,0);
+	this->angle = quat(0,1,0,0);
 }
 
 Camera::~Camera()
@@ -36,39 +36,34 @@ void Camera::update()
 
 		// Update quaternion
 		float angleQ = xoffset * this->sensitivity;
-		this->angle = cross(this->angle, angleAxis(angleQ, vec3(0,1,0)));
-
+		angle = angle ^ quat(angleQ, vec3(0,1,0));
 		angleQ = yoffset * sensitivity;
-		quat tmp = cross(angleAxis(angleQ, vec3(1,0,0)), this->angle);
-		if(tmp.x * tmp.x + tmp.z * tmp.z < 0.48f)
-			this->angle = tmp;
-
-		this->angle = normalize(this->angle);
+		quat _tmp = quat(angleQ, vec3(1,0,0)) ^ angle;
+		if(_tmp.x * _tmp.x + _tmp.z * _tmp.z < 0.48f)
+			angle = _tmp;
+		angle = angle.normalize();
 
 		// Update matrix view
-		this->forward = vec3(	2.0f * (this->angle.x*this->angle.z - this->angle.y*this->angle.w),
-								2.0f * (this->angle.y*this->angle.z + this->angle.x*this->angle.w),
-								1.0f - 2.0f * (this->angle.x*this->angle.x + this->angle.y*this->angle.y)
+		this->forward = vec3(	2.0f * (angle.x*angle.z - angle.y*angle.w),
+								2.0f * (angle.y*angle.z + angle.x*angle.w),
+								1.0f - 2.0f * (angle.x*angle.x + angle.y*angle.y)
 						);
-
-		this->right = cross(this->forward, vec3(0,1,0));
-		this->right = normalize(this->right);
+		
+		right = forward ^ vec3(0,1,0);
+		right = right.normalize();
 
 		updateView = true;
 
 		// cout << this->angle.x << " " << this->angle.y << " " << this->angle.z << " " << this->angle.w << endl;
-		
-		// Update frustum culling
-		// this->frustumCulling.update();
 	}
 
-	if (Input::ins.checkHold(87))
+	if (Input::ins.checkHold(87)) // W
 		this->velocity = this->movement(this->velocity, this->forward,  5.0f, 10.0f, true);
-	if (Input::ins.checkHold(83))
+	if (Input::ins.checkHold(83)) // S
 		this->velocity = this->movement(this->velocity, this->forward, -5.0f, 10.0f, true);
-	if (Input::ins.checkHold(65))
+	if (Input::ins.checkHold(65)) // A
 		this->velocity = this->movement(this->velocity, this->right, -5.0f, 10.0f, true);
-	if (Input::ins.checkHold(68))
+	if (Input::ins.checkHold(68)) // D
 		this->velocity = this->movement(this->velocity, this->right,  5.0f, 10.0f, true);
 	
 	if (this->velocity.x || this->velocity.y || this->velocity.z)
@@ -98,8 +93,12 @@ void Camera::update()
 	
 	if (updateView)
 	{
-		Graphic::ins.scene.view = lookAt(this->position, this->position + this->forward, vec3(0,1,0));
+		Graphic::ins.scene.view.lookat(position, position+forward, vec3(0,1,0));
+
 		Graphic::ins.shaderProgramMgr.setSceneView(Graphic::ins.scene.view);
+
+		// Update frustum culling
+		// frustumCulling.update();
 	}
 }
 
@@ -110,7 +109,7 @@ vec3 Camera::movement(vec3 velocity, vec3 vecdir, float speed, float max_speed, 
 	if (!yMovement)
 	{
 		newVelocity.y = 0;
-		normalize(newVelocity);
+		newVelocity = newVelocity.normalize();
 	}
 
 	newVelocity *= speed;

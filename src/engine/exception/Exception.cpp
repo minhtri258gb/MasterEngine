@@ -5,7 +5,7 @@
 #include "common.h"
 #include "Exception.h"
 
-using namespace mt::engine;
+using namespace mt;
 
 Exception::Exception()
 {

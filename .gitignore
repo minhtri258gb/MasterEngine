@@ -22,3 +22,6 @@
 /bin/plugins/libplugin1.dll
 /bin/plugins/libplugin2.dll
 /bin/plugins/libplugin3.dll
+/doc/engine/3dmath.md
+/res/models/astroboy
+/res/models/vampire

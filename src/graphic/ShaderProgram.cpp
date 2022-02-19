@@ -11,7 +11,6 @@
 #include "engine/Config.h"
 
 using namespace std;
-using namespace glm;
 using namespace mt::engine;
 using namespace mt::graphic;
 
@@ -37,9 +36,9 @@ void ShaderProgram::init(string _filename, int _flag)
 	if (_flag & SHADER_TYPE::FRAGMENT)
 		fragmentShaderId = this->initShaderPath(_filename+".fs.glsl", SHADER_TYPE::FRAGMENT);
 
-	unsigned int geographyShaderId = -1;
+	unsigned int geometryShaderId = -1;
 	if (_flag & SHADER_TYPE::GEOMETRY)
-		geographyShaderId = this->initShaderPath(_filename+".gs.glsl", SHADER_TYPE::GEOMETRY);
+		geometryShaderId = this->initShaderPath(_filename+".gs.glsl", SHADER_TYPE::GEOMETRY);
 
 	// # ADD geo and more path
 
@@ -50,7 +49,7 @@ void ShaderProgram::init(string _filename, int _flag)
 	if (_flag & SHADER_TYPE::FRAGMENT)
 		glAttachShader(this->programId, fragmentShaderId);
 	if (_flag & SHADER_TYPE::GEOMETRY)
-		glAttachShader(this->programId, geographyShaderId);
+		glAttachShader(this->programId, geometryShaderId);
 	glLinkProgram(this->programId);
 
 	// Clean
@@ -59,7 +58,7 @@ void ShaderProgram::init(string _filename, int _flag)
 	if (_flag & SHADER_TYPE::FRAGMENT)
 		glDeleteShader(fragmentShaderId);
 	if (_flag & SHADER_TYPE::GEOMETRY)
-		glDeleteShader(geographyShaderId);
+		glDeleteShader(geometryShaderId);
 	
 	// Check
 	int success;
@@ -89,49 +88,64 @@ void ShaderProgram::addLocation(string _unifromName)
 	this->locations.push_back(location);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, bool _value)
+void ShaderProgram::setUniform(int _locationId, bool _value)
 {         
     glUniform1i(this->locations.at(_locationId), (int)_value); 
 }
 
-void ShaderProgram::setUnifrom(int _locationId, int _value)
+void ShaderProgram::setUniform(int _locationId, int _value)
 { 
     glUniform1i(this->locations.at(_locationId), _value); 
 }
 
-void ShaderProgram::setUnifrom(int _locationId, float _value)
+void ShaderProgram::setUniform(int _locationId, float _value)
 { 
     glUniform1f(this->locations.at(_locationId), _value); 
 } 
 
-void ShaderProgram::setUnifrom(int _locationId, vec2 &_value)
+void ShaderProgram::setBool(int _locationId, bool _value)
+{         
+    glUniform1i(this->locations.at(_locationId), (int)_value); 
+}
+
+void ShaderProgram::setInt(int _locationId, int _value)
+{ 
+    glUniform1i(this->locations.at(_locationId), _value); 
+}
+
+void ShaderProgram::setFloat(int _locationId, float _value)
+{ 
+    glUniform1f(this->locations.at(_locationId), _value); 
+} 
+
+void ShaderProgram::setVec2(int _locationId, vec2 _value)
 {
 	glUniform2f(this->locations.at(_locationId), _value.x, _value.y);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, ivec2 &_value)
+void ShaderProgram::setVec2I(int _locationId, vec2i _value)
 {
 	glUniform2i(this->locations.at(_locationId), _value.x, _value.y);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, vec3 &_value)
+void ShaderProgram::setVec3(int _locationId, vec3 _value)
 {
 	glUniform3f(this->locations.at(_locationId), _value.x, _value.y, _value.z);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, ivec3 &_value)
+void ShaderProgram::setVec3I(int _locationId, vec3i _value)
 {
 	glUniform3i(this->locations.at(_locationId), _value.x, _value.y, _value.z);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, vec4 &_value)
+void ShaderProgram::setVec4(int _locationId, vec4 _value)
 {
 	glUniform4f(this->locations.at(_locationId), _value.x, _value.y, _value.z, _value.w);
 }
 
-void ShaderProgram::setUnifrom(int _locationId, mat4 &_value)
+void ShaderProgram::setMat4(int _locationId, mat4 _value)
 {
-	glUniformMatrix4fv(this->locations.at(_locationId), 1, GL_FALSE, value_ptr(_value));
+	glUniformMatrix4fv(this->locations.at(_locationId), 1, GL_FALSE, &_value[0]);
 	
 	// debug - begin
 	// cout << "=================\n";
@@ -142,9 +156,9 @@ void ShaderProgram::setUnifrom(int _locationId, mat4 &_value)
 	// debug - end
 }
 
-void ShaderProgram::setUniform(int _locationId, std::vector<glm::mat4> &_value)
+void ShaderProgram::setListMat4(int _locationId, std::vector<mat4> _value)
 {
-	glUniformMatrix4fv(this->locations.at(_locationId), _value.size(), GL_FALSE, value_ptr(_value[0]));
+	glUniformMatrix4fv(this->locations.at(_locationId), _value.size(), GL_FALSE, &_value[0][0]);
 }
 
 unsigned int ShaderProgram::initShaderPath(string _filepath, SHADER_TYPE _type)

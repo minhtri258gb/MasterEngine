@@ -30,16 +30,21 @@ public:
 	// Native
 	void use();
 	void addLocation(std::string unifromName);
-	void setUnifrom(int locationId, bool value);
-	void setUnifrom(int locationId, int value);
-	void setUnifrom(int locationId, float value);
-	void setUnifrom(int locationId, glm::vec2 &value);
-	void setUnifrom(int locationId, glm::ivec2 &value);
-	void setUnifrom(int locationId, glm::vec3 &value);
-	void setUnifrom(int locationId, glm::ivec3 &value);
-	void setUnifrom(int locationId, glm::vec4 &value);
-	void setUnifrom(int locationId, glm::mat4 &value);
-	void setUniform(int locationId, std::vector<glm::mat4> &value);
+
+	void setUniform(int locationId, bool value);
+	void setUniform(int locationId, int value);
+	void setUniform(int locationId, float value);
+
+	void setBool(int locationId, bool value);
+	void setInt(int locationId, int value);
+	void setFloat(int locationId, float value);
+	void setVec2(int locationId, vec2 value);
+	void setVec2I(int locationId, vec2i value);
+	void setVec3(int locationId, vec3 value);
+	void setVec3I(int locationId, vec3i value);
+	void setVec4(int locationId, vec4 value);
+	void setMat4(int locationId, mat4 value);
+	void setListMat4(int locationId, std::vector<mat4> value);
 
 private:
 

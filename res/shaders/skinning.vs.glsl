@@ -1,6 +1,6 @@
 #version 440 core
 
-layout (location = 0) in vec3 v_position; 
+layout (location = 0) in vec3 v_position;
 layout (location = 1) in vec2 v_texcoord;
 layout (location = 2) in vec3 v_normal;
 layout (location = 3) in ivec4 v_boneIds;

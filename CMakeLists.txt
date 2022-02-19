@@ -18,16 +18,43 @@ add_library(engine #SHARED
 ./src/engine/Input.cpp
 ./src/engine/Timer.h
 ./src/engine/Timer.cpp
+#./src/engine/Cryptography.h
+#./src/engine/Cryptography.cpp
 ./src/engine/datatype/Flag32.h
 ./src/engine/datatype/Flag32.cpp
+./src/engine/datatype/3D/Math3D.h
+./src/engine/datatype/3D/Vector2.h
+./src/engine/datatype/3D/Vector2.cpp
+./src/engine/datatype/3D/Vector2i.h
+./src/engine/datatype/3D/Vector2i.cpp
+./src/engine/datatype/3D/Vector3.h
+./src/engine/datatype/3D/Vector3.cpp
+./src/engine/datatype/3D/Vector3i.h
+./src/engine/datatype/3D/Vector3i.cpp
+./src/engine/datatype/3D/Vector4.h
+./src/engine/datatype/3D/Vector4.cpp
+./src/engine/datatype/3D/Vector4i.h
+./src/engine/datatype/3D/Vector4i.cpp
+./src/engine/datatype/3D/Matrix3x3.h
+./src/engine/datatype/3D/Matrix3x3.cpp
+./src/engine/datatype/3D/Matrix4x4.h
+./src/engine/datatype/3D/Matrix4x4.cpp
+./src/engine/datatype/3D/Quaternion.h
+./src/engine/datatype/3D/Quaternion.cpp
 ./src/engine/exception/Exception.h
 ./src/engine/exception/Exception.cpp
+./src/engine/exception/BoundingException.h
+./src/engine/exception/BoundingException.cpp
 ./src/engine/exception/LoadException.h
 ./src/engine/exception/LoadException.cpp
+./src/engine/exception/MathException.h
+./src/engine/exception/MathException.cpp
 ./src/engine/load/TextFile.h
 ./src/engine/load/TextFile.cpp
 ./src/engine/load/FileIni.h
 ./src/engine/load/FileIni.cpp
+./src/engine/math/Math.h
+./src/engine/math/Math.cpp
 ./src/engine/utils/StringUtils.h
 ./src/engine/utils/StringUtils.cpp
 )
@@ -54,6 +81,8 @@ add_library(graphic #SHARED
 ./src/graphic/ElementBufferObject.cpp
 ./src/graphic/Texture.h
 ./src/graphic/Texture.cpp
+# ./src/graphic/FrustumCulling.h
+# ./src/graphic/FrustumCulling.cpp
 
 ./src/graphic/models/ModelMgr.h
 ./src/graphic/models/ModelMgr.cpp
@@ -63,9 +92,11 @@ add_library(graphic #SHARED
 ./src/graphic/models/Model.cpp
 ./src/graphic/models/SimpleModel.h
 ./src/graphic/models/SimpleModel.cpp
-
 ./src/graphic/models/animation/AnimationModel.h
 ./src/graphic/models/animation/AnimationModel.cpp
+
+# ./src/graphic/particles/Sprite.h
+# ./src/graphic/particles/Sprite.cpp
 
 )
 target_link_libraries(graphic engine assimp glfw3)
@@ -87,6 +118,8 @@ add_library(game #SHARED
 ./src/game/entities/TestEnt.cpp
 ./src/game/entities/TestAnimEnt.h
 ./src/game/entities/TestAnimEnt.cpp
+# ./src/game/entities/TestParticleEnt.h
+# ./src/game/entities/TestParticleEnt.cpp
 ./src/game/entities/GroundEnt.h
 ./src/game/entities/GroundEnt.cpp
 )

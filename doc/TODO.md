@@ -1,4 +1,35 @@
 
+
+	#pragma region 
+	#pragma endregion
+
+# Engine
+
+## Logger
+
+### Level
+1: Game
+2: 
+3: 
+4: 
+5: 
+
+# Sprite
+
+geometry shader
+
+instance render
+
+update buffer vao
+
+animation texture sheet
+
+blend
+
+sort particle
+
+velocity algorithm
+
 ---
 
 ## Hiệu suất render:

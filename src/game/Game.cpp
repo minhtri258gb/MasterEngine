@@ -14,7 +14,6 @@
 // #include "graphic/models/animation/AnimationModel.h"
 
 using namespace std;
-using namespace glm;
 using namespace mt::engine;
 using namespace mt::graphic;
 using namespace mt::game;

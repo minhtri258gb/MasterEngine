@@ -6,7 +6,8 @@
 #include "common.h"
 #include "VertexBufferObject.h"
 
-using namespace mt::engine;
+using namespace std;
+using namespace mt;
 using namespace mt::graphic;
 
 VertexBufferObject::VertexBufferObject()
@@ -19,7 +20,7 @@ VertexBufferObject::~VertexBufferObject()
 	glDeleteBuffers(1, &this->gl_VBO);
 }
 
-void VertexBufferObject::init(int location, std::vector<glm::vec2> _vertices)
+void VertexBufferObject::init(int location, vector<vec2> _vertices)
 {
 	glGenBuffers(1, &this->gl_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, this->gl_VBO);
@@ -31,7 +32,7 @@ void VertexBufferObject::init(int location, std::vector<glm::vec2> _vertices)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void VertexBufferObject::init(int location, std::vector<glm::vec3> _vertices)
+void VertexBufferObject::init(int location, vector<vec3> _vertices)
 {
 	glGenBuffers(1, &this->gl_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, this->gl_VBO);
@@ -43,7 +44,7 @@ void VertexBufferObject::init(int location, std::vector<glm::vec3> _vertices)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void VertexBufferObject::init(int location, std::vector<glm::vec4> _vertices)
+void VertexBufferObject::init(int location, vector<vec4> _vertices)
 {
 	glGenBuffers(1, &this->gl_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, this->gl_VBO);
@@ -55,7 +56,7 @@ void VertexBufferObject::init(int location, std::vector<glm::vec4> _vertices)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void VertexBufferObject::init(int location, std::vector<glm::ivec4> _vertices)
+void VertexBufferObject::init(int location, vector<vec4i> _vertices)
 {
 	glGenBuffers(1, &this->gl_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, this->gl_VBO);
@@ -67,7 +68,19 @@ void VertexBufferObject::init(int location, std::vector<glm::ivec4> _vertices)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void VertexBufferObject::close()
+void VertexBufferObject::initDynamic(int location, int maxInstance, vec3 type)
 {
-	// #TODO
+	glGenBuffers(1, &this->gl_VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, this->gl_VBO);
+
+	vector<vec3> fake;
+	fake.resize(maxInstance, type);
+	glBufferData(GL_ARRAY_BUFFER, 12 * maxInstance, &fake[0], GL_DYNAMIC_DRAW); // #TODO ko dung fake data
+	
+	glVertexAttribPointer(location, 3, GL_FLOAT, GL_FALSE, 12, (void*)0);
+	glEnableVertexAttribArray(location);
+
+	glVertexAttribDivisor(location, 1);
+	
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

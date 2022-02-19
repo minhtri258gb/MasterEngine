@@ -3,7 +3,6 @@
 #include "common.h"
 #include "Entity.h"
 
-using namespace glm;
 using namespace mt::game;
 
 Entity::Entity()

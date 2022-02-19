@@ -10,9 +10,9 @@ class Model
 public:
 
 	// Variables
-	glm::vec3 position;
-	glm::quat angle;
-	glm::vec3 scale;
+	vec3 position;
+	quat angle;
+	vec3 scale;
 
 	// Forwards
 	Model();

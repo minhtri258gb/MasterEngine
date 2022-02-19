@@ -4,7 +4,6 @@
 #include "engine/Config.h"
 #include "Screen.h"
 
-using namespace glm;
 using namespace mt::engine;
 using namespace mt::graphic;
 
@@ -23,6 +22,6 @@ void Screen::init()
 	int height = Config::ins.windowHeight;
 
 	// Variable
-	this->proj = ortho(0.0f, (float)width, 0.0f, (float)height, 0.1f, 100.0f);
-	this->view = mat4(1.0f);
+	this->proj.ortho(0.0f, (float)width, 0.0f, (float)height, 0.1f, 100.0f);
+	this->view = mat4();
 }

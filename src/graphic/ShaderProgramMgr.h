@@ -18,10 +18,12 @@ public:
 	void close();
 
 	// Native
-	void setSceneProj(glm::mat4);
-	void setSceneView(glm::mat4);
-	void setScreenProj(glm::mat4);
-	void setScreenView(glm::mat4);
+	void setSceneProj(mat4);
+	void setSceneView(mat4);
+	void setScreenProj(mat4);
+	void setScreenView(mat4);
+	void setCameraPosition(vec3);
+
 
 private:
 

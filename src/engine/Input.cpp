@@ -1,5 +1,7 @@
 #define __MT_INPUT_CPP__
 
+#define DEBUG_SHOW_BUTTON 0
+
 #include <bitset>
 
 #include "common.h"
@@ -43,6 +45,10 @@ void Input::keyPress(int idkey, bool state)
 {
 	if (state)
 	{
+		#if DEBUG_SHOW_BUTTON
+			cout << "key: " << idkey << endl;
+		#endif
+
 		this->impl->keyPress.set(idkey, true);
 		this->impl->keyHold.set(idkey, true);
 	}

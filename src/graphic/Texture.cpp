@@ -8,7 +8,7 @@
 #include "common.h"
 #include "Texture.h"
 
-using namespace mt::engine;
+using namespace mt;
 using namespace mt::graphic;
 
 Texture::Texture()

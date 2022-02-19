@@ -5,7 +5,6 @@
 #define warning(msg) Exception(msg,__FILE__,__LINE__)
 
 namespace mt {
-namespace engine {
 
 class Exception {
 
@@ -31,6 +30,6 @@ protected:
 
 };
 
-}}
+}
 
 #endif

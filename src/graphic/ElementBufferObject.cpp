@@ -6,7 +6,7 @@
 #include "common.h"
 #include "ElementBufferObject.h"
 
-using namespace mt::engine;
+using namespace mt;
 using namespace mt::graphic;
 
 ElementBufferObject::ElementBufferObject()

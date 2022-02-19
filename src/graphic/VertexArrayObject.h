@@ -19,18 +19,23 @@ public:
 	~VertexArrayObject();
 	void init();
 
-	void addAttribute(std::vector<glm::vec2> data);
-	void addAttribute(std::vector<glm::vec3> data);
-	void addAttribute(std::vector<glm::vec4> data);
-	void addAttribute(std::vector<glm::ivec4> data);
+	void addAttribute(std::vector<vec2> data);
+	void addAttribute(std::vector<vec3> data);
+	void addAttribute(std::vector<vec4> data);
+	void addAttribute(std::vector<vec4i> data);
+
+	void addDynamicAttribute(int maxInstance, vec3 type);
+
 	void addIndices(std::vector<unsigned int> indices);
 
 	// Native
 	void bind();
 	void unbind();
 
+	void drawPointInstance();
 	void drawTriangle();
 	void drawElementTriangle();
+	void drawTriangleTrip();
 	
 	int getCount();
 	void setCount(int count);

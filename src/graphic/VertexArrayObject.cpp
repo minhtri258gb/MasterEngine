@@ -6,7 +6,8 @@
 #include "common.h"
 #include "VertexArrayObject.h"
 
-using namespace mt::engine;
+using namespace std;
+using namespace mt;
 using namespace mt::graphic;
 
 VertexArrayObject::VertexArrayObject()
@@ -32,7 +33,7 @@ void VertexArrayObject::init()
 	glGenVertexArrays(1, &this->gl_VAO);
 }
 
-void VertexArrayObject::addAttribute(std::vector<glm::vec2> data)
+void VertexArrayObject::addAttribute(vector<vec2> data)
 {
 	int location = VBOs.size();
 	VertexBufferObject* VBO = new VertexBufferObject();
@@ -40,7 +41,7 @@ void VertexArrayObject::addAttribute(std::vector<glm::vec2> data)
 	VBOs.push_back(VBO);
 }
 
-void VertexArrayObject::addAttribute(std::vector<glm::vec3> data)
+void VertexArrayObject::addAttribute(vector<vec3> data)
 {
 	int location = VBOs.size();
 	VertexBufferObject* VBO = new VertexBufferObject();
@@ -48,7 +49,7 @@ void VertexArrayObject::addAttribute(std::vector<glm::vec3> data)
 	VBOs.push_back(VBO);
 }
 
-void VertexArrayObject::addAttribute(std::vector<glm::vec4> data)
+void VertexArrayObject::addAttribute(vector<vec4> data)
 {
 	int location = VBOs.size();
 	VertexBufferObject* VBO = new VertexBufferObject();
@@ -56,7 +57,7 @@ void VertexArrayObject::addAttribute(std::vector<glm::vec4> data)
 	VBOs.push_back(VBO);
 }
 
-void VertexArrayObject::addAttribute(std::vector<glm::ivec4> data)
+void VertexArrayObject::addAttribute(vector<vec4i> data)
 {
 	int location = VBOs.size();
 	VertexBufferObject* VBO = new VertexBufferObject();
@@ -64,7 +65,15 @@ void VertexArrayObject::addAttribute(std::vector<glm::ivec4> data)
 	VBOs.push_back(VBO);
 }
 
-void VertexArrayObject::addIndices(std::vector<unsigned int> indices)
+void VertexArrayObject::addDynamicAttribute(int maxInstance, vec3 type)
+{
+	int location = VBOs.size();
+	VertexBufferObject* VBO = new VertexBufferObject();
+	VBO->initDynamic(location, maxInstance, type);
+	VBOs.push_back(VBO);
+}
+
+void VertexArrayObject::addIndices(vector<unsigned int> indices)
 {
 	this->count = indices.size();
 
@@ -82,6 +91,11 @@ void VertexArrayObject::unbind()
 	glBindVertexArray(0);
 }
 
+void VertexArrayObject::drawPointInstance()
+{
+	glDrawArraysInstanced(GL_POINT, 0, 1, 10);
+}
+
 void VertexArrayObject::drawTriangle()
 {
 	glDrawArrays(GL_TRIANGLES, 0, this->count);
@@ -90,6 +104,11 @@ void VertexArrayObject::drawTriangle()
 void VertexArrayObject::drawElementTriangle()
 {
 	glDrawElements(GL_TRIANGLES, this->count, GL_UNSIGNED_INT, nullptr);
+}
+
+void VertexArrayObject::drawTriangleTrip()
+{
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, this->count);
 }
 
 int VertexArrayObject::getCount()

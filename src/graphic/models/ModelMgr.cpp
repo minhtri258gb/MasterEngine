@@ -6,7 +6,6 @@
 #include "SimpleModel.h"
 
 using namespace std;
-using namespace glm;
 using namespace mt::graphic;
 
 ModelMgr::ModelMgr()

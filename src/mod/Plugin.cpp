@@ -9,7 +9,7 @@
 #include "engine/exception/LoadException.h"
 
 using namespace std;
-using namespace mt::engine;
+using namespace mt;
 using namespace mt::mod;
 
 typedef PluginBase* (*CreatePluginFunc)(void);

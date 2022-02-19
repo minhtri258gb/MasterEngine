@@ -4,7 +4,6 @@
 #include "Exception.h"
 
 namespace mt {
-namespace engine {
 
 class LoadException : public Exception {
 
@@ -25,6 +24,6 @@ private:
 
 };
 
-}}
+}
 
 #endif

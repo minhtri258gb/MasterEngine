@@ -10,7 +10,7 @@ class Entity
 public:
 
 	// Variable
-	glm::vec3 position;
+	vec3 position;
 
 	// Forward
 	Entity();

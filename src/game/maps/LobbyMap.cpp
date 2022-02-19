@@ -12,6 +12,7 @@
 #include "../entities/TestEnt.h"
 #include "../entities/GroundEnt.h"
 #include "../entities/TestAnimEnt.h"
+#include "../entities/TestParticleEnt.h"
 
 using namespace std;
 using namespace mt::graphic;
@@ -150,9 +151,8 @@ void LobbyMap::load()
 	// this->lstEntitiesStatic.push_back(new TestEnt("test"));
 	// this->lstEntitiesStatic.push_back(new TestEnt("box"));
 	this->lstEntitiesStatic.push_back(new GroundEnt("matdat"));
-
-	// Test animation model
-	this->lstEntitiesStatic.push_back(new TestAnimEnt("asd"));
+	this->lstEntitiesStatic.push_back(new TestAnimEnt("asd")); // Test animation model // OKE
+	// this->lstEntitiesStatic.push_back(new TestParticleEnt("test"));
 
 	// #EXTRA
 }

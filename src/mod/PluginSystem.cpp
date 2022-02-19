@@ -12,7 +12,7 @@
 #define PLUGIN_PATH "./"
 
 using namespace std;
-using namespace mt::engine;
+using namespace mt;
 using namespace mt::graphic;
 using namespace mt::game;
 using namespace mt::mod;

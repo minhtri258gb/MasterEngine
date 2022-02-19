@@ -15,11 +15,11 @@ public:
 	// Forward
 	VertexBufferObject();
 	~VertexBufferObject();
-	void init(int location, std::vector<glm::vec2> vertices);
-	void init(int location, std::vector<glm::vec3> vertices);
-	void init(int location, std::vector<glm::vec4> vertices);
-	void init(int location, std::vector<glm::ivec4> vertices);
-	void close();
+	void init(int location, std::vector<vec2> vertices);
+	void init(int location, std::vector<vec3> vertices);
+	void init(int location, std::vector<vec4> vertices);
+	void init(int location, std::vector<vec4i> vertices);
+	void initDynamic(int location, int maxInstance, vec3 type);
 
 	// Native
 	void bind();

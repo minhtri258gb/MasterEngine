@@ -6,7 +6,6 @@
 #include "SimpleModel.h"
 
 using namespace std;
-using namespace glm;
 using namespace mt::graphic;
 
 class ModelBuilder::ModelBuilderImpl
@@ -142,20 +141,20 @@ Model* ModelBuilder::createPlane()
 	SimpleModel *model = new SimpleModel();
 
 	vector<vec3> vertices;
-	vertices.push_back(vec3(-0.5f,  0.0f, -0.5f));
-	vertices.push_back(vec3(-0.5f,  0.0f,  0.5f));
-	vertices.push_back(vec3( 0.5f,  0.0f, -0.5f));
-	vertices.push_back(vec3( 0.5f,  0.0f,  0.5f));
-	
+	vertices.push_back(vec3(-0.5f, 0.0f, -0.5f));
+	vertices.push_back(vec3( 0.5f, 0.0f, -0.5f));
+	vertices.push_back(vec3(-0.5f, 0.0f,  0.5f));
+	vertices.push_back(vec3( 0.5f, 0.0f,  0.5f));
+
 	vector<vec2> texcoords;
-	texcoords.push_back(vec2(0.0f, 0.0f));
 	texcoords.push_back(vec2(0.0f, 1.0f));
-	texcoords.push_back(vec2(1.0f, 0.0f));
 	texcoords.push_back(vec2(1.0f, 1.0f));
+	texcoords.push_back(vec2(0.0f, 0.0f));
+	texcoords.push_back(vec2(1.0f, 0.0f));
 
 	vector<unsigned int> indices;
-	indices.push_back(0); indices.push_back(3); indices.push_back(1);
-	indices.push_back(0); indices.push_back(2); indices.push_back(3);
+	indices.push_back(0); indices.push_back(2); indices.push_back(1);
+	indices.push_back(1); indices.push_back(2); indices.push_back(3);
 	
 	model->VAO.init();
 	model->VAO.bind();

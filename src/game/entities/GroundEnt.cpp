@@ -7,7 +7,6 @@
 #include "GroundEnt.h"
 
 using namespace std;
-using namespace glm;
 using namespace mt::graphic;
 using namespace mt::game;
 
@@ -26,8 +25,8 @@ void GroundEnt::update()
 
 void GroundEnt::render()
 {
-	this->model->position = vec3(0,-2.0,0);
-	this->model->angle = quat(0,1,0,0);
-	this->model->scale = vec3(20,20,20);
+	this->model->position = vec3(0,-2,0);
+	this->model->angle = quat(0,0,0,1);
+	this->model->scale = vec3(10,10,10);
 	this->model->render();
 }

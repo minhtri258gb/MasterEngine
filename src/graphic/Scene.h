@@ -10,8 +10,8 @@ class Scene
 public:
 
 	// Variable
-	glm::mat4 proj;
-	glm::mat4 view;
+	mat4 proj;
+	mat4 view;
 
 	// Forward
 	Scene();
